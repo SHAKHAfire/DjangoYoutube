@@ -1,21 +1,58 @@
+{% load static %}
 <nav>
     <a href="{% url 'home_page' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
-        
-    </a>
-    <a href="{% url 'books_view' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Books">
-        📖
-    </a>
-    <a href="{% url 'add_book' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a book">
-        ➕
-    </a>
-    <a href="{% url 'profile' %}" data-bs   -toggle="tooltip" data-bs-placement="top" title="Profile">
-        👤
+        <i class="fa-brands fa-youtube"></i>WEtube   
     </a>
 
-    <a href="{% url 'logout' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
-        &rightarrow;
+    <a href="{% url 'home_page' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
+        <i class="fa-solid fa-house"></i>Home
     </a>
+
+    <a href="{% url 'home_page' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
+        <i class="fa-solid fa-house"> Home</i>
+    </a>    
+    {% comment %} <a href="{% url 'add_book' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a book">
+        ➕
+    </a> {% endcomment %}
+    {% comment %} <a href="{% url 'profile' %}" data-bs   -toggle="tooltip" data-bs-placement="top" title="Profile">
+        👤
+    </a> {% endcomment %}
+
+    {% comment %} <a href="{% url 'logout' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
+        &rightarrow;
+    </a> {% endcomment %}
 
 
 
 </nav>
+<script src="https://kit.fontawesome.com/2cd012f75a.js" crossorigin="anonymous"></script>
+<style>
+    nav {
+        height: 100vh;
+        background-color: #333;
+        width: 190px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 0 10px 10px 0;
+    }
+    nav a {
+        font: roboto;
+        font-size: x-large;
+        padding: 15px;
+        display: block;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        text-decoration: none;
+        border-radius: 0 10px 10px 0;
+        color: beige;
+        letter-spacing: 0.1em;
+    }
+    nav a:hover {
+        background-color: #111;
+    }
+    
+    
+
+</style>

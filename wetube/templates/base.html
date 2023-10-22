@@ -1,4 +1,4 @@
-{% load static %}
+{% load static account socialaccount%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +37,12 @@
       <a href="/accounts/login">Login</a>
     </div>
     <main id="logged-out-menu">
-      {% bootstrap_messages %}
+      {% comment %} {% bootstrap_messages %} {% endcomment %}
       {% block auth_content %}
         <h1>Authenticate</h1>
         <hr />
       {% endblock %}
     </main>
-  {% endif %}
+      {% endif %}
   </body>
 </html>
