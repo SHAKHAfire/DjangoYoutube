@@ -17,3 +17,36 @@
     <p>{{ this will not be interpreted as jinja code }}</p>
    {% endverbatim %}
 {% endblock %}
+
+
+
+{% block auth_content %}
+<nav class="logged-out-navbar">
+
+      
+  <a class="reg" href="/accounts/signup">Registration</a>
+  <a class="log" href="/accounts/login">Login</a>
+
+</nav>
+
+<style>
+  [class="reg"] {
+    text-decoration: none;
+    font-size: x-large;
+    position: absolute;
+    top: 55%;
+    left: 1%;
+    color: lavenderblush;
+  }
+  [class="log"] {
+    font-size: x-large;
+    text-decoration: none;
+    position: absolute;
+    left: 1%;
+    top: 45%;
+    color: lavenderblush;
+  }
+</style>
+
+  {% include 'monster.html' %}
+{% endblock auth_content %}

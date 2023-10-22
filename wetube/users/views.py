@@ -4,8 +4,8 @@ from math import e
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-
-from .forms import ProfileForm, UserForm, UserUpdateForm
+from .models import Profile
+from .forms import UserForm, UserUpdateForm
 
 
 log = logging.getLogger(__name__)
@@ -34,25 +34,27 @@ def registration(request):
 def profile(request):
 
     if request.method == 'POST':
-        p_form = ProfileForm(request.POST,
-                             instance=request.user.profile,
-                             files=request.FILES)
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        if p_form.is_valid() and u_form.is_valid():
+        if u_form.is_valid():
             user = u_form.save(commit=True)
-            profile = p_form.save(commit=True)
+
             messages.success(request,
                              f"Your account has been updated!")
             return redirect('profile')
         else:
             context = {
                 "u_form": u_form,
-                "p_form": p_form,
+
             }
             return render(request, 'profile.html', context)
 
     context = {
         'u_form': UserUpdateForm(instance=request.user),
-        'p_form': ProfileForm(instance=request.user.profile)
+
     }
     return render(request, 'profile.html', context)
+
+def all_users(request):
+    users=Profile.objects.all()
+    context={'users':users}
+    return render(request,'all_users.html',context)

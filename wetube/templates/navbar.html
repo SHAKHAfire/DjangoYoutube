@@ -8,19 +8,22 @@
         <i class="fa-solid fa-house"></i>Home
     </a>
 
-    <a href="{% url 'home_page' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
-        <i class="fa-solid fa-house"> Home</i>
-    </a>    
-    {% comment %} <a href="{% url 'add_book' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a book">
-        ➕
-    </a> {% endcomment %}
-    {% comment %} <a href="{% url 'profile' %}" data-bs   -toggle="tooltip" data-bs-placement="top" title="Profile">
-        👤
-    </a> {% endcomment %}
+
+    <a href="{% url 'profile' %}" data-bs   -toggle="tooltip" data-bs-placement="top" title="Profile">
+        <i class="fa-solid fa-user"></i>My profile
+    </a> 
 
     <a href="{% url 'logout' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
-        <i class="fa fa-sign-out" aria-hidden="true"></i>Loguot
+        <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
+    </a>
+    
+    {% comment %} <a href="{% url 'add_book' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a book">
+        ➕
     </a> 
+
+     <a href="{% url 'logout' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>Loguot
+    </a>  {% endcomment %}
 
 
 

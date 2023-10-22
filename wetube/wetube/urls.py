@@ -23,7 +23,9 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', home_view,name='home_page')
+    path('', home_view,name='home_page'),
+    path('users/', include('users.urls')),
+    
 ]
 
 urlpatterns += static(
