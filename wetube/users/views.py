@@ -4,7 +4,7 @@ from math import e
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from .models import Profile
+from .models import Profile,User
 from .forms import UserForm, UserUpdateForm
 
 
@@ -55,6 +55,6 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 def all_users(request):
-    users=Profile.objects.all()
+    users=User.objects.all()
     context={'users':users}
     return render(request,'all_users.html',context)

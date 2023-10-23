@@ -1,0 +1,69 @@
+{% load static account socialaccount%}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+
+    <title>
+
+        Titles
+
+    </title>
+  </head>
+  <body>
+<button><a href="{% url 'home_page' %}">Skip titles</a></button>
+        <div id="titles"><div id="titlecontent">
+
+          <p>    Designer                    : Shahruz</p>
+          <p>    Frontend                    : Shahruz</p>
+          <p>    Backend                     : Shahruz</p>
+          <p>    Tester                      : Shahruz</p>
+          <p>    Finansist                   : Shahruz</p>
+          <p>    Greatest person ever lived  : Shahruz</p>
+        </div></div>
+        <style>
+          #titles  {
+            position: absolute;
+            width: 18em;
+            height: 50em;
+            bottom: 0;
+            left: 50%;
+            margin-left: -9em;
+            font-size: 350%;
+            font-weight: bold;
+            text-align: justify;
+            overflow: hidden;
+            transform-origin: 50% 100%;
+            transform: perspective(300px) rotateX(25deg);
+          }
+          #titles:after {
+            position: absolute;
+            content: ' ';
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 60%;
+            background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+            pointer-events: none;
+          }
+        
+          #titlecontent {
+            position: absolute;
+            top: 100%;
+            animation: scroll 100s linear 4s infinite;
+          }
+        
+          @keyframes scroll {
+            0% { top: 100%; }
+            100% { top: -170%; }
+          }
+        </style>
+
+
+
+
+  </body>
+</html>
