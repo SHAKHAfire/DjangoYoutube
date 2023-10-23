@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block title %}
+  <title>Add a post</title>
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block link %}
+{% endblock %}
+
+{% block content %}
+<center>
+<h1>Publish new post</h1>
+    {% include "form_snippets.html" with form=form %}
+</center>
+{% endblock %}

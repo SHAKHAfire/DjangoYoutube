@@ -2,43 +2,97 @@
 
 {% block title %}
   Home page
-{% endblock title%}
-
-{% block content %}
-TODO
 {% endblock %}
 
+{% block content %}
+<script src="https://kit.fontawesome.com/2cd012f75a.js" crossorigin="anonymous"></script>
 
+  <center>
+    {% for post in posts %}
+    
+    <div calss='container'>
+      {% if post.author.id == request.user.id %}
+        <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
+        <a class="delete" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      {% endif %}
+      <a class="view" href="#"><i class="fa-solid fa-eye"></i></a>
+
+      <small class='author'>{{ post.author }}</small>
+      <small>{{ post.created }}</small>
+      <h2>{{ post.title|upper }}</h2>
+      {{ post.content }}
+    </div>
+      {% endfor %}
+    
+    </center>
+  <style>
+    *{
+      color: bisque;
+      font-family: 'Gilroy';
+    }
+    .update{
+      position: relative;
+      left: 45%;
+    }
+    small{
+      font-size: 8px;
+      position: relative;
+      color: gray;
+      top: -10px;
+      left: -90px;
+    }
+    [class='author']{
+      font-size: 13px;
+      color: aqua;
+      position: relative;
+      top: -1px;
+      left: -164px;
+
+    }
+    [calss='container']{
+      display: flex;
+      flex-direction: column;
+    justify-content: center;
+      text-align: center;
+      background: #2c3e50;
+      padding: 10px;
+      width: 30%;
+      margin: 5%;
+  
+    }
+    h2{
+      justify-content: center;
+    }
+
+  </style>
+{% endblock %}
 
 {% block auth_content %}
-<nav class="logged-out-navbar">
+  <nav class="logged-out-navbar">
+    <a class="reg" href="/accounts/signup">Registration</a>
+    <a class="log" href="/users/login">Login</a>
+  </nav>
 
-      
-  <a class="reg" href="/accounts/signup">Registration</a>
-  <a class="log" href="/users/login">Login</a>
-
-</nav>
-
-<style>
-  [class="reg"] {
-    text-decoration: none;
-    font-size: x-large;
-    position: absolute;
-    top: 55%;
-    left: 1%;
-    color: lavenderblush;
-    font-family: 'Courier New', Courier, monospace;
-  }
-  [class="log"] {
-    font-size: x-large;
-    text-decoration: none;
-    position: absolute;
-    left: 1%;
-    font-family: 'Courier New', Courier, monospace;
-    top: 45%;
-    color: lavenderblush;
-  }
-</style>
+  <style>
+    [class='reg'] {
+      text-decoration: none;
+      font-size: x-large;
+      position: absolute;
+      top: 55%;
+      left: 1%;
+      color: lavenderblush;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    [class='log'] {
+      font-size: x-large;
+      text-decoration: none;
+      position: absolute;
+      left: 1%;
+      font-family: 'Courier New', Courier, monospace;
+      top: 45%;
+      color: lavenderblush;
+    }
+  </style>
 
   {% include 'monster.html' %}
-{% endblock auth_content %}
+{% endblock %}

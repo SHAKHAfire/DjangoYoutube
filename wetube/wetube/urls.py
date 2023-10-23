@@ -21,6 +21,7 @@ from django.urls import path,include
 from .views import *
 
 urlpatterns = [
+    path('posts',include('posts.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', home_view,   name='home_page'),
