@@ -11,14 +11,14 @@
     {% for post in posts %}
     
     <div calss='container'>
-      {% if post.author.id == request.user.id %}
-        <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
-        <a class="delete" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-      {% endif %}
-      <a class="view" href="#"><i class="fa-solid fa-eye"></i></a>
-
       <small class='author'>{{ post.author }}</small>
       <small>{{ post.created }}</small>
+      {% if post.author.id == request.user.id %}
+        <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
+        <a class="delete" href="{% url 'delete_post' post.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      {% endif %}
+      <a class="view" href="{% url 'post_details' post.id %}"><i class="fa-solid fa-eye"></i></a>
+
       <h2>{{ post.title|upper }}</h2>
       {{ post.content }}
     </div>
@@ -29,6 +29,14 @@
     *{
       color: bisque;
       font-family: 'Gilroy';
+    }
+    .view{
+      position: relative;
+      left: 45%;
+    }
+    .delete{
+      position: relative;
+      left: 45%;
     }
     .update{
       position: relative;
@@ -56,8 +64,12 @@
       text-align: center;
       background: #2c3e50;
       padding: 10px;
-      width: 30%;
+      width: 35%;
       margin: 5%;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: skyblue;
+      border-width: 4px;
   
     }
     h2{

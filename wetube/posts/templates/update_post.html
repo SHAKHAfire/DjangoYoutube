@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-  <title>Update a post</title>
+  Update a post
 {% endblock %}
 
 {% block style %}
@@ -17,7 +17,51 @@
         <h1>Update post</h1>
     {% include "form_snippets.html" with form=form %}
 </center>
-
+<style>
+    *{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-family: Gilroy;
+      color: skyblue;
+    }
+    input{
+        color:black;
+    }
+    h1{
+      color: black;
+      padding: 30px;
+    }
+    .btn{
+      margin-top: 20px;
+      background-color: skyblue;
+        border-radius: 20px;
+        border: none;
+        width: 130px;
+        height: 26px;
+        color: black;
+    }
+  .form-text{
+    display: none;
+  }
+  textarea{
+    padding: 5px;
+    border: none;
+    background-color: lightgray;
+    border-radius: 15px;
+    outline: none;
+    color: black;
+  
+  }
+  input {
+    padding: 5px;
+    margin: 20px;
+    border: none;
+    background-color: lightgray;
+    border-radius: 15px;
+    outline: none;
+  }
+  </style>
 {% endblock %}
 
 {% block script %}

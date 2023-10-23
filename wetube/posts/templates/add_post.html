@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-  <title>Add a post</title>
+  Add a post
 {% endblock %}
 
 {% block style %}
@@ -17,4 +17,47 @@
 <h1>Publish new post</h1>
     {% include "form_snippets.html" with form=form %}
 </center>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: Gilroy;
+    color: skyblue;
+  }
+  h1{
+    color: black;
+    padding: 30px;
+  }
+  .btn{
+    margin-top: 20px;
+    background-color: skyblue;
+      border-radius: 20px;
+      border: none;
+      width: 130px;
+      height: 26px;
+      color: black;
+  }
+.form-text{
+  display: none;
+}
+textarea{
+    color: black;
+    padding: 5px;
+  border: none;
+  background-color: lightgray;
+  border-radius: 15px;
+  outline: none;
+
+}
+input {
+  padding: 5px;
+  margin: 20px;
+    color: black;
+    border: none;
+  background-color: lightgray;
+  border-radius: 15px;
+  outline: none;
+}
+</style>
 {% endblock %}

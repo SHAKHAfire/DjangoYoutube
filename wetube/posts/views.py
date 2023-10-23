@@ -1,3 +1,5 @@
+
+from django.contrib import messages
 from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from .forms import PostForm
@@ -41,3 +43,16 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
 def redirect_to_home(request):
     return redirect('home_page')
+
+def delete_post(request, post_id: int):
+    post = Posts.objects.get(id=post_id)
+    post.delete()
+    messages.success(request, 'Post deleted successfully!')
+    return redirect('http://127.0.0.1:8000/')
+
+class PostDetailsView(DetailView):
+    modal = Posts
+    template_name = 'post_details.html'
+
+    def get_queryset(self):
+        return Posts.objects.filter(id=self.kwargs['pk'])
