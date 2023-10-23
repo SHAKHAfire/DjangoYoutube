@@ -8,25 +8,66 @@
 {% endblock %}
 
 {% block content %}
+<center>
+
   <h1>{{ user.username }} {% translate "profile" %}</h1>
-
-
-
+  
+  
+  
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     {% if u_form.errors %}
-      {% bootstrap_form_errors u_form %}
+    {% bootstrap_form_errors u_form %}
     {% endif %}
     {% if p_form.errors %}
       {% bootstrap_form_errors p_form %}
-    {% endif %}
-
-    {% bootstrap_form u_form %}
-
+      {% endif %}
+      
+      {% bootstrap_form u_form %}
+      
     <button class="btn btn-success" type="submit">{% translate "Update" %}</button>
   </form>
-{% endblock %}
+</center>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+    font-family: Gilroy;
+  }
+  form{
+    width: 40%;
+    height: fit-content;
+    background: #2c3e50;
+    border-radius: 15px;
+    padding: 45px;
+    margin-top: 20px;
+    border: 4px solid skyblue;
+  }
+  .mb-3{
+    line-height: 33px;
+  }
+  form label{
+    display: none;
+  }
+  .mb-3 input{
+    padding: 5px;
+    border-radius: 12px;
+    border: none;
+  }
+  .form-text{
+    color: skyblue;
+  }
+  .btn {
+    margin-top: 30px;
+    background-color: skyblue;
+      border-radius: 20px;
+      border: none;
+      width: 130px;
+      height: 26px;
+  }
+</style>
+  {% endblock %}
 
 {% block script %}
 

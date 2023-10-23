@@ -1,24 +1,43 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>Logged out</title>
+  Logged out
 {% endblock %}
 
 {% block auth_content %}
-  <div class="container">
-    <h1>Logged out successfully</h1>
+<nav class="logged-out-navbar">
 
-    <hr>
-    <div class="mb-5">
-        <small class="text-muted">
-            Login again
-            <a href="/accounts/login">
-                Login
-            </a>
-        </small>
-    </div>
-  </div>
-{% endblock %}
+      
+  <a class="reg" href="/accounts/signup">Registration</a>
+  <a class="log" href="/users/login">Login</a>
+
+</nav>
+
+<style>
+  [class="reg"] {
+    text-decoration: none;
+    font-size: x-large;
+    position: absolute;
+    top: 55%;
+    left: 1%;
+    color: lavenderblush;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  [class="log"] {
+    font-size: x-large;
+    text-decoration: none;
+    position: absolute;
+    left: 1%;
+    top: 45%;
+    color: lavenderblush;
+    font-family: 'Courier New', Courier, monospace;
+  }
+</style>
+
+  {% include 'monster.html' %}
+{% endblock auth_content %}
+
+
 
 {% block script %}
 
