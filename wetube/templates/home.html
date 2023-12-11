@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block title %}
   Home page
@@ -8,26 +9,31 @@
 <script src="https://kit.fontawesome.com/2cd012f75a.js" crossorigin="anonymous"></script>
 
   <center>
+
+
     {% for post in posts %}
     
     <div calss='container'>
-      <small class='author'>{{ post.author }}</small>
-      <small>{{ post.created }}</small>
+      <div class="avtor">
+        <small class='author'>{{ post.author }}</small>
+        <small>{{ post.created }}</small>
+</div>
+      <div class="icons">
       {% if post.author.id == request.user.id %}
         <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
-        <a class="delete" href="{% url 'delete_post' post.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a class="delete" href="#" onclick="confirm()"><i class="fa fa-trash" aria-hidden="true"></i></a>
       {% endif %}
       <a class="view" href="{% url 'post_details' post.id %}"><i class="fa-solid fa-eye"></i></a>
-
+    </div>
       <h2>{{ post.title|upper }}</h2>
-      {{ post.content }}
+      <p>{{ post.content }}</p>
     </div>
       {% endfor %}
     
     </center>
   <style>
     *{
-      color: bisque;
+      color: black;
       font-family: 'Gilroy';
     }
     .view{
@@ -42,19 +48,20 @@
       position: relative;
       left: 45%;
     }
+
     small{
       font-size: 8px;
-      position: relative;
       color: gray;
-      top: -10px;
-      left: -90px;
+    }
+    .avtor{
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 5px;
     }
     [class='author']{
       font-size: 13px;
-      color: aqua;
-      position: relative;
-      top: -1px;
-      left: -164px;
+      color: #427877;
 
     }
     [calss='container']{
@@ -62,10 +69,10 @@
       flex-direction: column;
     justify-content: center;
       text-align: center;
-      background: #2c3e50;
-      padding: 10px;
-      width: 35%;
-      margin: 5%;
+      background: #dedede;
+      padding: auto;
+      width: 50%;
+      margin-bottom: 5%;
       border-radius: 10px;
       border-style: solid;
       border-color: skyblue;
@@ -75,36 +82,21 @@
     h2{
       justify-content: center;
     }
+    p{
+      line-height: 40px;
+      width: 100%;
+    }
 
   </style>
 {% endblock %}
+{% block script %}
 
-{% block auth_content %}
-  <nav class="logged-out-navbar">
-    <a class="reg" href="/accounts/signup">Registration</a>
-    <a class="log" href="/users/login">Login</a>
-  </nav>
+function confirm(){
+  let result = confirm("Are you sure to delete the post?");
+  if(result ){
+    location.href = "{% url 'delete_post' post.id %}";
+}
+}
 
-  <style>
-    [class='reg'] {
-      text-decoration: none;
-      font-size: x-large;
-      position: absolute;
-      top: 55%;
-      left: 1%;
-      color: lavenderblush;
-      font-family: 'Courier New', Courier, monospace;
-    }
-    [class='log'] {
-      font-size: x-large;
-      text-decoration: none;
-      position: absolute;
-      left: 1%;
-      font-family: 'Courier New', Courier, monospace;
-      top: 45%;
-      color: lavenderblush;
-    }
-  </style>
+{% endblock script %}
 
-  {% include 'monster.html' %}
-{% endblock %}

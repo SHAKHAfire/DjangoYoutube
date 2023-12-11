@@ -6,7 +6,7 @@ from posts.models import Posts
 
 def home_view(request):
 
-    context={'posts':Posts.objects.all()}
+    context={'posts':Posts.objects.all()[::-1]}
 
     return render(request, template_name="home.html", context=context)
 

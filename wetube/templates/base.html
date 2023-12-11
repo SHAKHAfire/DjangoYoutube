@@ -1,4 +1,5 @@
 {% load static account socialaccount%}
+{% load django_bootstrap5 %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,24 +21,98 @@
         {% include 'navbar.html' %}
 
       </div>
+      
+    <center>
+        <div class="messages" id="messages">
 
+          {% for msg in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hey!</strong> {{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">✖ </button>
+          </div>
 
+          {% endfor %}
+        </div>
+    </center>
+      <div >
+        
         {% block content %}
-
         {% endblock %}
 
-
       </div>
+    </div>
+<style>
+
+</style>
+
+
     </main>
     {% else %}
 
     <main id="logged-out-menu">
-
+        <div id="messages">
+          {% bootstrap_messages %}
+        </div>
       {% block auth_content %}
-        <h1>Authenticate</h1>
-        <hr />
+      <nav class="logged-out-navbar">
+        <a class="reg" href="/accounts/signup">Registration</a>
+        <a class="log" href="/users/login">Login</a>
+      </nav>
+    
+      <style>
+        .messages div{
+          color: black;
+          background-color: #dedede;
+          border-radius: 6px;
+          border: 1px solid;
+          margin: 10px 0px;
+          padding:15px 10px 15px 50px;
+        }
+        {% comment %} .messages { 
+          border: 1px solid;
+          margin: 10px 0px;
+          padding:15px 10px 15px 50px;
+          background-repeat: no-repeat;
+          background-position: 10px center;
+        } {% endcomment %}
+        [class='reg'] {
+          text-decoration: none;
+          font-size: x-large;
+          position: absolute;
+          top: 55%;
+          left: 1%;
+          color: lavenderblush;
+          font-family: 'Courier New', Courier, monospace;
+        }
+        [class='log'] {
+          font-size: x-large;
+          text-decoration: none;
+          position: absolute;
+          left: 1%;
+          font-family: 'Courier New', Courier, monospace;
+          top: 45%;
+          color: lavenderblush;
+        }
+      </style>
+    
+      {% include 'monster.html' %}
       {% endblock %}
     </main>
       {% endif %}
+
+      {% bootstrap_javascript %}
+      <script>
+        setTimeout(() => {
+          const messages = document.querySelectorAll('#messages')
+          messages.forEach((msg) => {
+            msg.remove()
+          })
+        }, 10000)
+        
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+      </script>  
   </body>
 </html>

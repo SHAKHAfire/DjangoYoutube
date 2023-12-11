@@ -1,4 +1,4 @@
-{% extends "socialaccount/base.html" %}
+{% comment %} {% extends "socialaccount/base.html" %} {% endcomment %}
 
 
 {% block head_title %}Sign in{% endblock head_title %}
@@ -18,7 +18,7 @@
     
     <form method="post">
       {% csrf_token %}
-      <button class="btn" type="submit">Continuee</button>
+      <button class="btn" type="submit">Continue</button>
     </form>
 </div>
 <style>

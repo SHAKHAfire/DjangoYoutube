@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-{% load static %}
 
 {% block title %}
   Post view
@@ -11,36 +10,82 @@
 
 {% block content %}
 <center>
-    <div class='container'>
-    <h1>{{ object.title }}</h1>
-    <p>{{ object.content }}</p>
-    <i class="details">created in  {{object.created}} </i>
+    <div class="container">
+      <h1>{{ object.title }}</h1>
+      <p>{{ object.content }}</p>
+      <i class="details">created in  {{object.created}} </i>
     
-    <i class="details">Author - {{object.author}} </i>
-</div>
+      <i class="details">Author - {{object.author}} </i>
+
+    </div>
+
+
+    <div class="add-comment">
+
+      <a href={% url 'add-comment' object.id %}><button>add comment</button></a>
+      
+    </div>
+    
+    <hr>
+    {% if object.comments.all %}
+    
+    {% for comment in object.comments.all reversed%}
+    <div class="comments">
+
+      <p class="author"> <strong>  {{ comment.author }} </strong>{{ comment.created }} </p>
+          <h4>{{ comment.content }}</h4>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+        <h4>no comments found</h4>
+        {% endif %}
+
 </center>
 <style>
-    *{
-        color: bisque;
-        font-family: 'Gilroy';
-      }
-    .container{
-        display: flex;
-        flex-direction: column;
-      justify-content: center;
-        text-align: center;
-        background: #2c3e50;
-        padding: 10px;
-        width: 35%;
-        margin: 5%;
-        border-radius: 10px;
-        border-style: solid;
-        border-color: skyblue;
-        border-width: 4px;
-    }
-    .details{
-        color: aqua;
-    }
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  background: #dedede;
+  padding: 10px;
+  width: 34%;
+  margin-bottom: 3%;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: skyblue;
+  border-width: 4px;
+}
+.add-comment button{
+  border: none;
+  border-radius: 5px;
+  width: 15%;
+  height: 30px;
+  font-weight: 500;
+  background: #dedede;
+}
+.details{
+  color: #427877;
+}
+.comments{
+  background: #dedede;
+  width: 30%;
+  padding: 10px;
+  display: flex;
+  margin: 15px;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 2px solid skyblue;
+}
+.author{
+  display: flex;
+  gap: 10px;
+  
+}
 </style>
 {% endblock %}
 

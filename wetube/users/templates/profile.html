@@ -28,8 +28,79 @@
       
     <button class="btn btn-success" type="submit">{% translate "Update" %}</button>
   </form>
+
+    {% for post in posts %}
+    
+    <div calss='container'>
+      <small class='author'>{{ post.author }}</small>
+      <small>{{ post.created }}</small>
+
+        <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
+        <a class="delete" href="{% url 'delete_post' post.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      <a class="view" href="{% url 'post_details' post.id %}"><i class="fa-solid fa-eye"></i></a>
+
+      <h2>{{ post.title|upper }}</h2>
+      {{ post.content }}
+    </div>
+      {% endfor %}
+    
+    
+
 </center>
 <style>
+  
+  *{
+    color: bisque;
+    font-family: 'Gilroy';
+  }
+  .view{
+    position: relative;
+    left: 45%;
+  }
+  .delete{
+    position: relative;
+    left: 45%;
+  }
+  .update{
+    position: relative;
+    left: 45%;
+  }
+  small{
+    font-size: 8px;
+    position: relative;
+    color: gray;
+    top: -10px;
+    left: -90px;
+  }
+  [class='author']{
+    font-size: 13px;
+    color: aqua;
+    position: relative;
+    top: -1px;
+    left: -164px;
+
+  }
+  [calss='container']{
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+    text-align: center;
+    background: #2c3e50;
+    padding: auto;
+    width: 35%;
+    margin-left: 50%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: skyblue;
+    border-width: 4px;
+
+  }
+  h2{
+    justify-content: center;
+  }
+
+
   *{
     padding: 0;
     margin: 0;

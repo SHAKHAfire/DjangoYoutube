@@ -9,6 +9,10 @@
   <div class="container">
     <h1>Registration</h1>
     
+    <small class="text-muted">
+      Already have an account?
+      <a href="/users/login">Login</a> 
+    </small>
     {% include "form_snippets.html" with form=form btn_text='Register' %}
     
   
@@ -17,10 +21,6 @@
       <i class="fab fa-google"></i>oogle
     </a></button>
     <div class="mb-5">
-      <small class="text-muted">
-        Already have an account?
-        <a href="/accounts/login">Login</a> 
-      </small>
     </div>
   </div>
 </center>
@@ -36,11 +36,7 @@
       .container {
         margin-top: 20px;
       }
-      .text-muted{
-        position: relative;
-        top: -350px;
-        color: skyblue;
-      }
+    
       .text-muted a{
         color: aqua;
 
@@ -72,7 +68,7 @@
       }
       .panel-body{
     width: 40%;
-    height: 250px;
+    height: fit-content;
     background: #2c3e50;
     border-radius: 10px;
     padding: 25px;

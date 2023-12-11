@@ -7,7 +7,11 @@ from .models import Profile
 
 class UserForm(UserCreationForm):
     email = forms.EmailField(required=True,
-                             help_text="We never share your email with anyone else.")
+                             help_text="We will never share your email with anyone else.")
+
+    def get_clean_email(self):
+        email = self.cleaned_data['email']
+        return email
 
     class Meta:
         model = User
