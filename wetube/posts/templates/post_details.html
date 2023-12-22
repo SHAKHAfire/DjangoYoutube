@@ -31,8 +31,11 @@
     
     {% for comment in object.comments.all reversed%}
     <div class="comments">
-
+      {% if comment.author is None %}
+      <p class="author"> <strong>  Deleted account </strong>{{ comment.created }} </p>
+      {% else %}
       <p class="author"> <strong>  {{ comment.author }} </strong>{{ comment.created }} </p>
+      {% endif %}
           <h4>{{ comment.content }}</h4>
         </div>
 
