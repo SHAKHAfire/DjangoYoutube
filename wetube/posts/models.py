@@ -6,12 +6,12 @@ from datetime import datetime
 # Create your models here.
 
 
-
 class Posts(models.Model):
     title: str = models.CharField(max_length=50)
     content: str = models.TextField()
-    author: User = models.ForeignKey(User,
-                                     on_delete=models.SET_NULL, null=True, blank=True)
+    author: User = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
     created: datetime = models.DateTimeField(auto_now_add=True)
 
     objects = models.Manager()  # default
@@ -21,10 +21,18 @@ class Posts(models.Model):
 
 
 class PostComment(models.Model):
-    post = models.ForeignKey(Posts, related_name="comments", on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey(
+        Posts,
+        related_name="comments",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     content: str = models.TextField()
     created: datetime = models.DateTimeField(auto_now_add=True)
-    author: User = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author: User = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return "%s - %s" % (self.post, self.author)

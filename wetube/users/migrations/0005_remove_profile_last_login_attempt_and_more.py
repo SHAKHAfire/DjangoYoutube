@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0004_profile_last_login_attempt_profile_login_delay'),
+        ("users", "0004_profile_last_login_attempt_profile_login_delay"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='profile',
-            name='last_login_attempt',
+            model_name="profile",
+            name="last_login_attempt",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='login_delay',
+            model_name="profile",
+            name="login_delay",
         ),
     ]

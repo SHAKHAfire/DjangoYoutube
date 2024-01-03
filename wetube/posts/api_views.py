@@ -6,12 +6,14 @@ from .models import Posts
 from .serializers import PostSerializer
 
 
-class PostViewSet(mixins.CreateModelMixin,
-                  mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin,
-                  mixins.DestroyModelMixin,
-                  mixins.ListModelMixin,
-                  GenericViewSet):
-    permission_classes=[IsAdminUser]
+class PostViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    permission_classes = [IsAdminUser]
     queryset = Posts.objects.all()
     serializer_class = PostSerializer
