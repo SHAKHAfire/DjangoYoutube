@@ -21,7 +21,7 @@ router.register(r"posts", PostViewSet, basename="posts")
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/drf-auth/", include("rest_framework.urls")),
-    path("posts", include("posts.urls")),
+    path("posts/", include("posts.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("", home_view, name="home_page"),

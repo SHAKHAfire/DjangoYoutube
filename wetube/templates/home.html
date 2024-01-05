@@ -21,7 +21,7 @@
       <div class="icons">
       {% if post.author.id == request.user.id %}
         <a class="update" href="{% url 'update_post' post.id %}"><i class="fas fa-edit"></i></a>
-        <a class="delete" href="#" onclick="confirm()"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a class="delete" href="{% url 'delete_post' post.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
       {% endif %}
       <a class="view" href="{% url 'post_details' post.id %}"><i class="fa-solid fa-eye"></i></a>
     </div>
@@ -36,15 +36,7 @@
       color: black;
       font-family: 'Gilroy';
     }
-    .view{
-      position: relative;
-      left: 45%;
-    }
-    .delete{
-      position: relative;
-      left: 45%;
-    }
-    .update{
+    .icons{
       position: relative;
       left: 45%;
     }
@@ -72,18 +64,16 @@ padding: 5px;
       background: #dedede;
       padding: auto;
       width: 50%;
-      margin-bottom: 5%;
+      margin-bottom: 2%;
       border-radius: 10px;
       border-style: solid;
       border-color: skyblue;
       border-width: 4px;
   
     }
-    h2{
-      justify-content: center;
-    }
+
     p{
-      line-height: 40px;
+      line-height: 25px;
       width: 100%;
     }
 
@@ -91,12 +81,7 @@ padding: 5px;
 {% endblock %}
 {% block script %}
 
-function confirm(){
-  let result = confirm("Are you sure to delete the post?");
-  if(result ){
-    location.href = "{% url 'delete_post' post.id %}";
-}
-}
+
 
 {% endblock script %}
 

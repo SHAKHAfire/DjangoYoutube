@@ -21,10 +21,10 @@ class AddPostView(CreateView):
     modal = Posts
     form_class = PostForm
     template_name = "add_post.html"
-    success_url = "home_page"
 
     def post(self, *args, **kwargs):
         form = self.get_form()
+        
         if form.is_valid():
             post = form.save(commit=False)
             post.author = self.request.user
@@ -42,38 +42,50 @@ class AddPostView(CreateView):
                 )
             except SMTPException as error:
                 logger.critical("Error while sending email")
-        return redirect("home_page")
+        return redirect(f"/posts/post-details/{post.id}")
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     modal = Posts
     form_class = PostForm
     template_name = "update_post.html"
-    success_url = "/"
 
     def get_queryset(self):
+        self.success_url=f"/posts/post-details/{self.kwargs['pk']}"
         return Posts.objects.filter(id=self.kwargs["pk"])
-
+    
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:
             return True
         return False
 
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    modal = Posts
+    form_class = PostForm
+    template_name = "update_post.html"
+    success_url = "/"
 
 def redirect_to_home(request):
     return redirect("home_page")
 
 
-def delete_post(request, post_id: int):
-    post = Posts.objects.delete(id=post_id)
+def delete_post(request, pk: int):
+    Posts.objects.get(id=pk).delete()
     messages.success(request, "Post deleted successfully!")
-    return redirect("http://127.0.0.1:8000/")
+    return redirect("home_page")
+
+def delete_comment(request,pk:int):
+    comment=PostComment.objects.get(id=pk)
+    post_id=comment.post.id
+    comment.delete()    
+    messages.success(request, "Comment deleted successfully!")
+    return redirect(f"/posts/post-details/{post_id}")
 
 
 class PostDetailsView(DetailView):
     modal = Posts
-    form_class = PostCommentForm
+    # form_class = PostCommentForm
     template_name = "post_details.html"
 
     def post(self, *args, **kwargs):
@@ -106,11 +118,7 @@ class CommentCreateView(CreateView):
             comment.save()
             messages.success(
                 request=self.request,
-                message="Commented under post %s successfully!"
-                % (comment.post.title),
-            )
+                message=f"Commented under post {comment.post.title} successfully!")
 
         return redirect(
-            "http://127.0.0.1:8000/posts/post-details/%s"
-            % (self.request.path.split("/")[-2])
-        )
+            f"/posts/post-details/{self.request.path.split('/')[-2]}")

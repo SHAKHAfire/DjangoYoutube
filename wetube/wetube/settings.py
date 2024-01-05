@@ -116,11 +116,20 @@ WSGI_APPLICATION = "wetube.wsgi.application"
 
 DATABASES = {
     "default": {
+                # """SQLITE3"""
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+
+                # """POSTGRESQL"""
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'db.sql',
+        # 'USER': 'shahruz',
+        # 'PASSWORD': 'qweqweqwe',
+        # 'HOST': 'localhost',
+        # 'PORT': 5432,
+
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -146,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/tashkent"
 
 USE_I18N = True
 

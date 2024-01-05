@@ -22,6 +22,7 @@
 
     <div class="add-comment">
 
+
       <a href={% url 'add-comment' object.id %}><button>add comment</button></a>
       
     </div>
@@ -32,12 +33,20 @@
     {% for comment in object.comments.all reversed%}
     <div class="comments">
       {% if comment.author is None %}
-      <p class="author"> <strong>  Deleted account </strong>{{ comment.created }} </p>
+      <p class="date"> <strong class="author">  Deleted account </strong>{{ comment.created }} </p>
       {% else %}
-      <p class="author"> <strong>  {{ comment.author }} </strong>{{ comment.created }} </p>
+      <p class="date"> <strong class="author">  {{ comment.author }} </strong>{{ comment.created }} </p>
       {% endif %}
-          <h4>{{ comment.content }}</h4>
-        </div>
+      <div class="icons">
+        {% if comment.author.id == request.user.id %}
+          <a class="update" href="#"><i class="fas fa-edit"></i></a>
+          <a class="delete" href="{% url 'delete_comment' comment.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        {% endif %}
+      </div >
+          <div class="comment-content">
+            <h4>{{ comment.content }}</h4>
+          </div>
+      </div>
 
         {% endfor %}
 
@@ -48,6 +57,23 @@
 </center>
 <style>
 
+    *{
+      color: black;
+      font-family: 'Gilroy';
+    }
+
+  .delete{
+    color: black;
+    position: relative;
+    top: -30px;
+    left: 45%;
+  }
+  .update{
+    color: black;
+    position: relative;
+    top: -30px;
+    left: 45%;
+  }
 .container{
   display: flex;
   flex-direction: column;
@@ -72,12 +98,13 @@
   background: #dedede;
 }
 .details{
+
   color: #427877;
 }
 .comments{
   background: #dedede;
   width: 30%;
-  padding: 10px;
+  padding: 4px;
   display: flex;
   margin: 15px;
   flex-direction: column;
@@ -85,9 +112,22 @@
   border: 2px solid skyblue;
 }
 .author{
+  font-size: 13px;
+  color: #427877;
+
+}
+.date{
+  font-size: 8px;
+  color: gray;
   display: flex;
   gap: 10px;
   
+}
+.comment-content{
+  margin-top: 5px;
+  background-color: #dffffb;
+  border-radius: 5px;
+
 }
 </style>
 {% endblock %}
