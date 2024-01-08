@@ -11,7 +11,7 @@
 {% block content %}
 <center>
 <h1>Publish new post</h1>
-    {% include "form_snippets.html" with form=form %}
+    {% include "form_snippets.html" with form=form btn_text='Post'%}
 </center>
 <style>
   *{
@@ -51,14 +51,16 @@ textarea{
 input {
   font-size: large;
   padding: 10px;
-  padding-right: 200px;
-  padding-left: 30  px;
+  width: 31%;
   margin: 20px;
     color: black;
     border: none;
   background-color: lightgray;
   border-radius: 15px;
   outline: none;
+}
+.form-label{
+  display: none;
 }
 </style>
 {% endblock %}
