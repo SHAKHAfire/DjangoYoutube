@@ -11,7 +11,12 @@
 {% block content %}
 <center>
     <div class="container">
-      <h1>{{ object.title }}</h1>
+        <div class="post-icons">
+            <a  href="{% url 'delete_post' object.id %}"><i class="fa fa-trash" aria-hidden="true">  </i></a>
+
+          <a  href="{% url 'update_post' object.id %}"><i class="fas fa-edit"></i></i></a>
+      </div>
+        <h1>{{ object.title }}</h1>
       <p>{{ object.content }}</p>
       <i class="details">created in  {{object.created}} </i>
     
@@ -37,7 +42,7 @@
       {% else %}
       <p class="date"> <strong class="author">  {{ comment.author }} </strong>{{ comment.created }} </p>
       {% endif %}
-      <div class="icons">
+      <div class="comment-icons">
         {% if comment.author.id == request.user.id %}
           <a class="update" href="#"><i class="fas fa-edit"></i></a>
           <a class="delete" href="{% url 'delete_comment' comment.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -61,19 +66,28 @@
       color: black;
       font-family: 'Gilroy';
     }
+    .post-icons{
+      gap: 100px;
+      color: black;
+      position: relative;
+      right: -45%;
+      
+    }    
+    .update-post{
+      color: black;
+      position: relative;
+      right: -45%;
+      
+    }
+  
 
-  .delete{
+  .comment-icons{
     color: black;
     position: relative;
     top: -30px;
     left: 45%;
   }
-  .update{
-    color: black;
-    position: relative;
-    top: -30px;
-    left: 45%;
-  }
+
 .container{
   display: flex;
   flex-direction: column;
