@@ -42,7 +42,8 @@ class AddPostView(CreateView):
                 )
             except SMTPException as error:
                 logger.critical("Error while sending email")
-        return redirect(f"/posts/post-details/{post.id}")
+            return redirect(f"/posts/post-details/{post.id}")
+        else:messages.warning(self.request, "invalid form")
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
