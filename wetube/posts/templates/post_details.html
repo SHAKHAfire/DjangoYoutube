@@ -24,13 +24,10 @@
 
     </div>
 
-
-    <div class="add-comment">
-
-
-      <a href={% url 'add-comment' object.id %}><button>add comment</button></a>
-      
+    <div class="comment-form">
+        {% include "form_snippets.html" with form=form btn_text='Comment'%}
     </div>
+
     
     <hr>
     {% if object.comments.all %}
@@ -60,6 +57,7 @@
         {% endif %}
 
 </center>
+
 <style>
 
     *{
@@ -72,7 +70,24 @@
       position: relative;
       right: -45%;
       
-    }    
+    } 
+    .form-label{
+      display:none;
+    }   
+    .form-text{
+      display: none;
+    }
+    textarea{
+      color: black;
+      padding: 10px;
+      padding-left: 10px;
+    border: none;
+    background-color: lightgray;
+    border-radius: 15px;
+    outline: none;
+
+  
+  }
     .update-post{
       color: black;
       position: relative;
@@ -103,14 +118,7 @@
   border-color: skyblue;
   border-width: 4px;
 }
-.add-comment button{
-  border: none;
-  border-radius: 5px;
-  width: 15%;
-  height: 30px;
-  font-weight: 500;
-  background: #dedede;
-}
+
 .details{
 
   color: #427877;
@@ -143,7 +151,17 @@
   border-radius: 5px;
 
 }
+.btn{
+  margin-top: 20px;
+  background-color: skyblue;
+    border-radius: 20px;
+    border: none;
+    width: 130px;
+    height: 26px;
+    color: black;
+}
 </style>
+
 {% endblock %}
 
 {% block script %}

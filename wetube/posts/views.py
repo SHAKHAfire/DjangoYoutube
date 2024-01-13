@@ -1,7 +1,8 @@
 import logging
 from django.contrib import messages
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic.edit import FormMixin
 from .forms import PostForm, PostCommentForm
 from .models import *
 from django.shortcuts import redirect
@@ -84,42 +85,42 @@ def delete_comment(request,pk:int):
     return redirect(f"/posts/post-details/{post_id}")
 
 
-class PostDetailsView(DetailView):
+class PostDetailsView(DetailView, FormMixin):
+
     modal = Posts
-    # form_class = PostCommentForm
-    template_name = "post_details.html"
-
-    def post(self, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = self.request.user
-            post.save()
-        return redirect("/")
-
-    def get_queryset(self):
-        return Posts.objects.filter(id=self.kwargs["pk"])
-
-
-class CommentCreateView(CreateView):
-    modal = PostComment
     form_class = PostCommentForm
+    template_name = "post_details.html"
+    
 
-    template_name = "add_post_comment.html"
-    success_url = "/"
+    def get_success_url(self) -> str:
+        return f"/posts/post-details/{self.request.path.split('/')[-1]}"
 
+    # def post(self, *args, **kwargs):
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         post = form.save(commit=False)
+    #         post.author = self.request.user
+    #         post.save()
+    #     return redirect("/")
+    
     def post(self, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = self.request.user
             comment.content = form.cleaned_data["comment_content"]
-            post_id = self.request.path.split("/")[-2]
+            post_id = self.request.path.split("/")[-1]
             comment.post = Posts.objects.get(id=post_id)
             comment.save()
             messages.success(
                 request=self.request,
                 message=f"Commented under post {comment.post.title} successfully!")
-
         return redirect(
-            f"/posts/post-details/{self.request.path.split('/')[-2]}")
+            f"/posts/post-details/{self.request.path.split('/')[-1]}")
+
+    
+    def get_queryset(self):
+        return Posts.objects.filter(id=self.kwargs["pk"])
+
+
+

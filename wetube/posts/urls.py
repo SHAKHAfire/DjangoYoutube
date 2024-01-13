@@ -21,9 +21,4 @@ urlpatterns = [
         PostDetailsView.as_view(),
         name="post_details",
     ),
-    path(
-        "post-details/<int:pk>/add-comment",
-        CommentCreateView.as_view(),
-        name="add-comment",
-    ),
 ]

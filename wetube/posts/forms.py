@@ -21,9 +21,9 @@ class PostForm(forms.ModelForm):
 
 class PostCommentForm(forms.ModelForm):
     comment_content = forms.CharField(
-        label="content",
+        label="Enter comment",
         help_text="Comment content",
-        widget=forms.Textarea(attrs={"rows": 3, "cols": 50}),
+        widget=forms.Textarea(attrs={"rows": 2, "cols": 50}),
     )
 
     class Meta:
