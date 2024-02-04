@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block title %}
-  Post view
+{{ object.title }}
 {% endblock %}
 
 {% block link %}
@@ -15,9 +15,9 @@
             <a  href="{% url 'delete_post' object.id %}"><i class="fa fa-trash" aria-hidden="true">  </i></a>
 
           <a  href="{% url 'update_post' object.id %}"><i class="fas fa-edit"></i></i></a>
-      </div>
+        </div>
         <h1>{{ object.title }}</h1>
-      <p>{{ object.content }}</p>
+      <p class='post-content'>{{ object.content }}</p>
       <i class="details">created in  {{object.created}} </i>
     
       <i class="details">Author - {{object.author}} </i>
@@ -81,46 +81,48 @@
       color: black;
       padding: 10px;
       padding-left: 10px;
-    border: none;
-    background-color: lightgray;
-    border-radius: 15px;
-    outline: none;
-
-  
-  }
+      border: none;
+      background-color: lightgray;
+      border-radius: 15px;
+      outline: none;
+      
+      
+    }
     .update-post{
       color: black;
       position: relative;
       right: -45%;
       
     }
-  
-
-  .comment-icons{
-    color: black;
-    position: relative;
-    top: -30px;
-    left: 45%;
-  }
-
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-  background: #dedede;
-  padding: 10px;
-  width: 34%;
-  margin-bottom: 3%;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: skyblue;
-  border-width: 4px;
-}
-
-.details{
-
+    
+    
+    .comment-icons{
+      color: black;
+      position: relative;
+      top: -30px;
+      left: 45%;
+    }
+    
+    .container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      background: #dedede;
+      padding: 10px;
+      width: 34%;
+      margin-bottom: 3%;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: skyblue;
+      border-width: 4px;
+    }
+    .post-content{
+      align-items: left;
+    }
+    
+    .details{
+      
   color: #427877;
 }
 .comments{
@@ -149,6 +151,9 @@
   margin-top: 5px;
   background-color: #dffffb;
   border-radius: 5px;
+  text-align: left;
+  padding-left: 20px;
+  padding-top : -100px;
 
 }
 .btn{
