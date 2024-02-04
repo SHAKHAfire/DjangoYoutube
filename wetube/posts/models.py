@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 class Posts(models.Model):
-    title: str = models.CharField(max_length=50)
+    title: str = models.CharField(max_length=255)
     content: str = models.TextField()
     author: User = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True
