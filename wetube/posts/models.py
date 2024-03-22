@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
-# Create your models here.
-
-
 class Posts(models.Model):
     title: str = models.CharField(max_length=255)
     content: str = models.TextField()
@@ -13,7 +10,7 @@ class Posts(models.Model):
         User, on_delete=models.SET_NULL, null=True, blank=True
     )
     created: datetime = models.DateTimeField(auto_now_add=True)
-
+    time_updated: datetime = models.DateTimeField(auto_now=True)
     objects = models.Manager()  # default
 
     def __str__(self):
@@ -35,4 +32,4 @@ class PostComment(models.Model):
     )
 
     def __str__(self):
-        return "%s - %s" % (self.post, self.author)
+        return f"{self.post} - {self.author}"
