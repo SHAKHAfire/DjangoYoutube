@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 class AddPostView(CreateView):
-    modal = Posts
+    modal = Post
     form_class = PostForm
     template_name = "add_post.html"
 
@@ -48,13 +48,13 @@ class AddPostView(CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    modal = Posts
+    modal = Post
     form_class = PostForm
     template_name = "update_post.html"
 
     def get_queryset(self):
         self.success_url=f"/posts/post-details/{self.kwargs['pk']}"
-        return Posts.objects.filter(id=self.kwargs["pk"])
+        return Post.objects.filter(id=self.kwargs["pk"])
     
     def test_func(self):
         post = self.get_object()
@@ -63,7 +63,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    modal = Posts
+    modal = Post
     form_class = PostForm
     template_name = "update_post.html"
     success_url = "/"
@@ -73,7 +73,7 @@ def redirect_to_home(request):
 
 
 def delete_post(request, pk: int):
-    Posts.objects.get(id=pk).delete()
+    Post.objects.get(id=pk).delete()
     messages.success(request, "Post deleted successfully!")
     return redirect("home_page")
 
@@ -87,7 +87,7 @@ def delete_comment(request,pk:int):
 
 class PostDetailsView(DetailView, FormMixin):
 
-    modal = Posts
+    modal = Post
     form_class = PostCommentForm
     template_name = "post_details.html"
     
@@ -110,7 +110,7 @@ class PostDetailsView(DetailView, FormMixin):
             comment.author = self.request.user
             comment.content = form.cleaned_data["comment_content"]
             post_id = self.request.path.split("/")[-1]
-            comment.post = Posts.objects.get(id=post_id)
+            comment.post = Post.objects.get(id=post_id)
             comment.save()
             messages.success(
                 request=self.request,
@@ -120,7 +120,7 @@ class PostDetailsView(DetailView, FormMixin):
 
     
     def get_queryset(self):
-        return Posts.objects.filter(id=self.kwargs["pk"])
+        return Post.objects.filter(id=self.kwargs["pk"])
 
 
 

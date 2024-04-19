@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
-class Posts(models.Model):
+class Post(models.Model):
     title: str = models.CharField(max_length=255)
     content: str = models.TextField()
     author: User = models.ForeignKey(
@@ -19,7 +19,7 @@ class Posts(models.Model):
 
 class PostComment(models.Model):
     post = models.ForeignKey(
-        Posts,
+        Post,
         related_name="comments",
         on_delete=models.CASCADE,
         null=True,

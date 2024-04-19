@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Posts, PostComment
+from .models import Post, PostComment
 
 
 class PostForm(forms.ModelForm):
@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Posts
+        model = Post
         fields = ["title", "content"]
 
 

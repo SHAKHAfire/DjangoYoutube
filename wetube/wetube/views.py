@@ -1,10 +1,10 @@
 from django.views.generic import TemplateView
 from django.shortcuts import redirect, render, HttpResponse
-from posts.models import Posts
+from posts.models import Post
 
 
 def home_view(request):
-    context = {"posts": Posts.objects.all()[::-1]}
+    context = {"posts": Post.objects.all()[::-1]}
     return render(request, template_name="home.html", context=context)
 
 
