@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .models import Profile, User
 from .forms import UserForm, UserUpdateForm
-from posts.models import Post
+from posts.models import Posts
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -60,12 +60,12 @@ def profile(request):
         else:
             context = {
                 "u_form": u_form,
-                "posts": Post.objects.filter(author=request.user),
+                "posts": Posts.objects.filter(author=request.user),
             }
             return render(request, "profile.html", context)
 
     context = {
         "u_form": UserUpdateForm(instance=request.user),
-        "posts": Post.objects.filter(author=request.user),
+        "posts": Posts.objects.filter(author=request.user),
     }
     return render(request, "profile.html", context)
